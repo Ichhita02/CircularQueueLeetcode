@@ -1,0 +1,70 @@
+# CircularQueueLeetcode
+class MyCircularQueue {
+public:
+int f,r;
+int x;
+int *q;
+    MyCircularQueue(int k) {
+        q=new int[k];
+        r=-1;
+        f=-1;
+        x=k;
+    }
+    bool enQueue(int value) {
+        if(isFull())
+        {
+            return false;
+        }
+        r=(r+1)%x;
+        q[r]=value;
+        if(f==-1)
+        {
+            f=0;
+        }
+        return true;
+    }
+    bool deQueue() {
+        if(isEmpty())
+        {
+            return false ;
+        }
+        if(f==r)
+        {
+            f=-1;
+            r=-1;
+        }
+        else
+        {
+            f=(f+1)%x;
+        }
+        return true;
+    }
+    int Front() {
+        if(isEmpty())
+          {  return -1;
+          }
+        return (q[f]);
+    }
+    int Rear() {
+         if(isEmpty())
+          {  return -1;
+          }
+        return (q[r]);
+    }
+    bool isEmpty() {
+        if(f==-1){
+            return true;
+        }
+        else
+        {
+        return false;
+        }
+    }
+    bool isFull() {
+        if((r+1)%x==f)
+        {
+            return true;
+        }
+        return false;
+    }
+};
